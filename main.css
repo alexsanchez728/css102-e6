@@ -1,0 +1,30 @@
+/* car styling */
+body {
+	font-family: 'Noto Sans', sans-serif;
+}
+.product {
+	width: 400px;
+	border: 1px solid slategrey;
+}
+
+.image img {
+	max-width: 100%;
+	border-top: 1px solid gray;
+	border-bottom: 1px solid gray;
+}
+
+.description * {
+	text-align: center;
+	margin: 0;
+}
+.description {
+	padding: 2%;
+}
+.description h6 {
+	padding: 2%;
+	font-size: 1.5em;
+}
+.title {
+	text-align: center;
+	text-transform: uppercase;
+}
