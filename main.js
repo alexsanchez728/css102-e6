@@ -50,34 +50,69 @@ allProducts.push(product2);
 allProducts.push(product3);
 allProducts.push(product4);
 allProducts.push(product5);
-console.log("all my baby products", allProducts);
 
 var productContainer = document.getElementById("product-container");
 
-for (var i = 0; i < allProducts.length; i++){
+function buildDomString(product) {
+  var domString = "";
 
-	var currentProduct = allProducts[i];
-
-	var domString = "";
-
- 	domString +=	'<section class="product">';
-	domString +=        '<div class="title">';
-	domString +=          '<h2>' + currentProduct.name +'</h2>';
-	domString +=        '</div>';
-	domString +=        '<div class="image">';
-	domString +=          '<img src="' + currentProduct.imagePath +'" alt="' + currentProduct.imageAlt +'">';
-	domString +=        '</div>';
-	domString +=        '<div class="description">';
-	domString +=          '<p>' + currentProduct.description +'</p>';
-	domString +=          '<h6>$' + currentProduct.price +'</h6>';
-	domString +=        '</div>';
-	domString +=      '</section>';
-
-
-	console.log("Dom String from for loop", domString)
-	productContainer.innerHTML += domString;
-
+  domString +=  '<section class="product">';
+  domString +=        '<div class="title child">';
+  domString +=          '<h2>' + product.name +'</h2>';
+  domString +=        '</div>';
+  domString +=        '<div class="image child">';
+  domString +=          '<img src="' + product.imagePath +'" alt="' + product.imageAlt +'">';
+  domString +=        '</div>';
+  domString +=        '<div class="description child">';
+  domString +=          '<p>' + product.description +'</p>';
+  domString +=          '<h6>$' + product.price +'</h6>';
+  domString +=        '</div>';
+  if (product.soldOut) {
+    domString +=      '<div class="sold-out child">';
+    domString +=        '<img src="./images/soldOut.png" alt="Sold Out">';
+    domString +=      '</div>';
+  }
+  domString +=      '</section>';
+  return domString;
 }
+
+function printProductArrayToDom(productArray) {
+  for (var i = 0; i < productArray.length; i++){
+
+    var currentProduct = productArray[i];
+      // Send buildDomString the 'currentProcduct' that we're looping through here
+    var productDomString = buildDomString(currentProduct);
+
+      // print out domString that looped through the function
+    // console.log("Dom String from for loop", productDomString)
+    productContainer.innerHTML += productDomString;
+  }
+}
+printProductArrayToDom(allProducts);
+
+var selectedCard;
+
+document.getElementById("product-container").addEventListener("click", function(event){
+  // console.log(event.target)
+  changeBorder(event);
+  printSelectedDescription();
+});
+function changeBorder(event) {
+
+  if (event.target.classList.contains("child")) {
+    selectedCard = event.target.parentNode;
+  } else if (event.target.parentNode.parentNode.classList.contains("product")){
+    selectedCard = event.target.parentNode.parentNode;
+  } else if (event.target.classList.contains("product")) {
+    selectedCard = event.target;
+  }
+  selectedCard.classList.add("boarderPatrol");
+}
+function printSelectedDescription() {
+  var description = selectedCard.childNodes[2].childNodes[0].innerHTML;
+  console.log(description);
+}
+
 
 
 
