@@ -1,6 +1,6 @@
-var allProducts = [];
+const allProducts = [];
 
-var product1 = {
+const product1 = {
   name: "Mop Attire",
   imagePath: "./images/mopAttire.jpg",
   imageAlt: "Product: Mop Attire",
@@ -9,7 +9,7 @@ var product1 = {
   soldOut: false
 };
 
-var product2 = {
+const product2 = {
   name: "Taco Suit",
   imagePath: "./images/tacoSuit.jpg",
   imageAlt: "Product: Taco Suit",
@@ -18,7 +18,7 @@ var product2 = {
   soldOut: false
 };
 
-var product3 = {
+const product3 = {
   name: "Neck Decoration",
   imagePath: "./images/neckDecoration.jpg",
   imageAlt: "Product: Neck Decoration",
@@ -27,7 +27,7 @@ var product3 = {
   soldOut: false
 };
 
-var product4 = {
+const product4 = {
   name: "Head Ornament",
   imagePath: "./images/headOrnament.jpg",
   imageAlt: "Product: Head Ornament",
@@ -36,7 +36,7 @@ var product4 = {
   soldOut: true
 };
 
-var product5 = {
+const product5 = {
   name: "Boob Hat",
   imagePath: "./images/boobHat.jpg",
   imageAlt: "Product: Boob Hat",
@@ -51,10 +51,17 @@ allProducts.push(product3);
 allProducts.push(product4);
 allProducts.push(product5);
 
-var productContainer = document.getElementById("product-container");
+const addNewProduct = (name, imagePath, imageAlt, description, price, soldOut) => {
+  const newProduct = {name, imagePath, imageAlt, description, price, soldOut}
+  allProducts.push(newProduct);
+}
 
-function buildDomString(product) {
-  var domString = "";
+addNewProduct("Butt Paste", "https://upload.wikimedia.org/wikipedia/en/e/e8/Boudreauxs_Butt_Paste.jpg", "butt paste", "lorem ipsum", 4.99, true);
+
+const productContainer = document.getElementById("product-container");
+
+const buildDomString = (product) => {
+  let domString = "";
 
   domString +=  '<section class="product">';
   domString +=        '<div class="title child">';
@@ -76,12 +83,12 @@ function buildDomString(product) {
   return domString;
 }
 
-function printProductArrayToDom(productArray) {
-  for (var i = 0; i < productArray.length; i++){
+const printProductArrayToDom = (productArray) => {
+  for (let i = 0; i < productArray.length; i++){
 
-    var currentProduct = productArray[i];
+    const currentProduct = productArray[i];
       // Send buildDomString the 'currentProcduct' that we're looping through here
-    var productDomString = buildDomString(currentProduct);
+    const productDomString = buildDomString(currentProduct);
 
       // print out domString that looped through the function
     // console.log("Dom String from for loop", productDomString)
@@ -90,14 +97,14 @@ function printProductArrayToDom(productArray) {
 }
 printProductArrayToDom(allProducts);
 
-var selectedCard;
+let selectedCard;
 
-document.getElementById("product-container").addEventListener("click", function(event){
+document.getElementById("product-container").addEventListener("click", (event) => {
   // console.log(event.target)
   changeBorder(event);
   printSelectedDescription();
 });
-function changeBorder(event) {
+const changeBorder = (event) => {
 
   if (event.target.classList.contains("child")) {
     selectedCard = event.target.parentNode;
@@ -108,14 +115,7 @@ function changeBorder(event) {
   }
   selectedCard.classList.add("boarderPatrol");
 }
-function printSelectedDescription() {
-  var description = selectedCard.childNodes[2].childNodes[0].innerHTML;
+const printSelectedDescription = () => {
+  const description = selectedCard.childNodes[2].childNodes[0].innerHTML;
   console.log(description);
 }
-
-
-
-
-
-
-
